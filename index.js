@@ -92,7 +92,7 @@ app.post('/add-shop-for-owner', authenticateToken,(req, res) => {
     con.query(`Insert into shop set ?`,data ,function (err, result) {
         if (err) throw err;
         else{
-            res.send('Shop Created');
+            res.send('Shop Created for owner');
         }
     });
 });
