@@ -81,7 +81,10 @@ app.post('/save-debt-for-customer', authenticateToken,(req, res) => {
     });
 });
 app.get('/get-shops-of-owner', authenticateToken,(req, res) => {
-    con.query(`Select * from shop where shop_owner_number= "${req.user.shop_owner_number}" `,function (err, result) {
+    con.query(`Select shop.shop_name as shop_name, shop.shop_owner_number as owner_number, shop.longitude as longitude, shop.lattitude as lattitude, shop_owner.user_name as owner_name 
+                from shop 
+                    left join shop_owner on shop_owner.phone_number = shop.shop_owner_number
+                where shop.shop_owner_number= "${req.user.phone_number}" `,function (err, result) {
         if (err) throw err;
         else{
             res.send(result);
