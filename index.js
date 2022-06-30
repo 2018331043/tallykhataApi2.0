@@ -115,3 +115,4 @@ app.get('/get-shops-of-owner', authenticateToken,(req, res) => {
 });
 //listening to port
 app.listen(port, () => console.log(process.env.DB_USERNAME))
+console.log("hello world!");
