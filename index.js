@@ -80,14 +80,16 @@ app.post('/save-debt-for-customer', authenticateToken,(req, res) => {
         }
     });
 });
-app.post('/add-shop-for-owner', authenticateToken,(req, res) => {
+app.post('/add-shop-for-owner', authenticateToken,async (req, res) => {
     const data={
-        lattitude : req.body.lattitude,
-        longitude : req.body.longitude,
+        // lattitude : req.body.lattitude,
+        // longitude : req.body.longitude,
+        lattitude : 25.66,
+        longitude : 24.33,
         shop_owner_number:req.user.phone_number,
         shop_number:req.body.shop_number,
         description:req.body.description,
-        name:req.body.name
+        shop_name:req.body.name
     }
     con.query(`Insert into shop set ?`,data ,function (err, result) {
         if (err) throw err;
