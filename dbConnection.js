@@ -13,7 +13,6 @@ con.connect(function(err) {
     console.log("Connected!");
     con.query(`SELECT * FROM shop_owner `, function (err, result) {
         if (err) throw err;
-        console.log(result);
     });
 });
 
