@@ -152,7 +152,7 @@ app.post('/add-shop-for-owner', authenticateToken,async (req, res) => {
 });
 app.get('/get-shops-of-owner', authenticateToken, async (req, res) => {
     try{
-        var query=`Select shop.shop_number as shop_number, shop.shop_name as shop_name, shop.shop_owner_number as owner_number, shop.longitude as longitude, shop.lattitude as lattitude, shop_owner.user_name as owner_name 
+        var query=`Select shop.shop_number as shop_number, shop.shop_name as shop_name,shop.description as description, shop.shop_owner_number as owner_number, shop.longitude as longitude, shop.lattitude as lattitude, shop_owner.user_name as owner_name
                 from shop 
                     left join shop_owner on shop_owner.phone_number = shop.shop_owner_number
                 where shop.shop_owner_number= "${req.user.phone_number}"`
@@ -183,7 +183,7 @@ app.post('/get-shop-details', authenticateToken, async (req, res) => {
                     if (err) throw err;
                     else{
                         console.log(shopDebtresult);
-                        res.send({shopDetails: shopDetailsresult,
+                        res.send({shopDetails: shopDetailsresult[0],
                             shopDebtresult:shopDebtresult
                         });
                     }
