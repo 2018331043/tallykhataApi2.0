@@ -172,6 +172,9 @@ app.get('/get-shops-of-owner', authenticateToken, async (req, res) => {
 app.post('/get-shop-details', authenticateToken, async (req, res) => {
     try{
         var shopDebtsQuery = `Select * from customer_wise_debt where  customer_wise_debt.shop_number = "${req.body.shop_number}"`
+        if(req.body.searchKeyWord!=null && req.body.searchKeyWord.length!=0 ){
+            shopDebtsQuery = shopDebtsQuery + `and (customer_wise_debt.customer_phone_number like '%${req.body.searchKeyWord}%' or customer_wise_debt.customer_name like '%${req.body.searchKeyWord}%' )`
+        }
         var query=`Select shop.shop_name as shop_name, shop.shop_owner_number as owner_number, shop.longitude as longitude, shop.lattitude as lattitude, shop_owner.user_name as owner_name 
                 from shop 
                     left join shop_owner on shop_owner.phone_number = shop.shop_owner_number
